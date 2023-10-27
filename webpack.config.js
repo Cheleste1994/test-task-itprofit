@@ -8,7 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const baseConfig = {
   context: path.resolve(__dirname, "src"),
   mode: "development",
-  entry: "./index.ts",
+  entry: "./ts/app.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index.js",
@@ -22,16 +22,16 @@ const baseConfig = {
     port: 8080,
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./src/index.html"),
       filename: "index.html",
     }),
-    new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'src/assets/favicon.png'),
-          to: path.resolve(__dirname, 'dist/assets'),
+          from: path.resolve(__dirname, 'src/img/favicon.png'),
+          to: path.resolve(__dirname, 'dist/img'),
         },
       ],
     }),
