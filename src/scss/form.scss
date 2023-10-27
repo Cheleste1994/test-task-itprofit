@@ -47,5 +47,13 @@
         filter: contrast(1.4);
       }
     }
+
+    .not__valid {
+      border-color: rgba(255, 0, 0, 0.534);
+    }
+
+    .form__valid {
+      font-size: 0.7rem;
+    }
   }
 }
