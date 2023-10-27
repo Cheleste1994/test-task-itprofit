@@ -30,7 +30,6 @@
       &::placeholder {
         color: rgba(255, 255, 255, 0.808);
       }
-
     }
 
     textarea {
@@ -55,5 +54,9 @@
     .form__valid {
       font-size: 0.7rem;
     }
+  }
+
+  .form__not-valid {
+    border-color: rgba(255, 0, 0, 0.534);
   }
 }
