@@ -2,9 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@*": [
-        "./src/*"
-      ]
+      "@*": ["./src/*"]
     },
     "target": "es2016",
     "allowJs": true,
@@ -17,10 +15,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": false
   },
 
-  "include": [
-    "src", "server/index.js", "server/index.js",
-  ]
+  "include": ["src"]
 }
