@@ -7,7 +7,7 @@
     <link href="./img/favicon.png" rel="shortcut icon" />
     <title>Test-task</title>
   </head>
-  <body class="body">
+  <body class="body" style="opacity: 0; transition: opacity 1s linear">
     <header class="header">
       <div class="header__logo">Logo</div>
       <div class="burger">
@@ -22,7 +22,9 @@
       <div class="form">
         <form id="form__contact">
           <input type="text" id="name" name="name" placeholder="Имя" />
+          <label for="name"></label>
           <input type="text" id="email" name="email" placeholder="E-mail" />
+          <label for="email"></label>
           <input type="text" id="phone" name="phone" placeholder="Телефон" />
           <textarea
             id="message"

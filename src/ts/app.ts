@@ -1,6 +1,9 @@
 import '../scss/global.scss';
-import '../scss/form.scss';
 import './phoneMask';
 import './validateForm';
-import '../scss/modal.scss';
 import './modal';
+
+window.addEventListener('load', () => {
+  const body = document.querySelector('.body') as HTMLElement;
+  body.style.opacity = '1';
+});

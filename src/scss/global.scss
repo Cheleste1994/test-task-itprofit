@@ -1,3 +1,6 @@
+@import 'form';
+@import 'modal';
+
 * {
   margin: 0;
   padding: 0;
@@ -37,7 +40,7 @@ body {
   width: 100%;
   max-width: 100vw;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   background: $bodyBackgroundColor;
   color: $textColor;
 

@@ -20,7 +20,7 @@
     width: 100%;
     padding: 30px 10px;
 
-    > * {
+    > *:not(label) {
       background-color: rgba(0, 0, 0, 0.336);
       color: white;
       padding: 5px;
@@ -29,6 +29,21 @@
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.808);
+      }
+    }
+
+    > label {
+      display: none;
+      font-size: 0.6rem;
+      text-align: center;
+      color: rgba(255, 0, 0, 0.534);
+
+      &.not__valid {
+        display: block;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          font-size: 0.8rem;
+        }
       }
     }
 
@@ -49,6 +64,10 @@
 
     .not__valid {
       border-color: rgba(255, 0, 0, 0.534);
+    }
+
+    .rules__valid {
+      font-size: 0.5rem;
     }
 
     .form__valid {

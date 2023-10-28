@@ -29,7 +29,8 @@
 
   .burger__menu {
     background-color: rgba(0, 212, 255, 1);
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     width: 300px;
     text-align: center;
     padding: 20px;
@@ -38,11 +39,12 @@
 }
 
 .burger__overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.548);
   z-index: -1;
   visibility: hidden;
@@ -53,10 +55,15 @@
 .burger__open {
   transform: translateX(0);
   z-index: 10;
+  position: fixed;
 
   & ~ .burger__overlay {
     z-index: 1;
     opacity: 1;
     visibility: visible;
   }
+}
+
+.body:has(.burger__open) {
+  overflow: hidden;
 }

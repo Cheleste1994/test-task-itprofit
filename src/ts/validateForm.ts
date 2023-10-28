@@ -1,6 +1,8 @@
 import formSubmit, { FormDataObject } from './formSubmit';
 
-const MIN_LENGTH_NAME = 3;
+const RULES_MIN_LENGTH_NAME = 3;
+const RULES_NAME_VALIDATION = `поле name должно содержать не менее ${RULES_MIN_LENGTH_NAME} символов`;
+const RULES_EMAIL_VALIDATION = `поле email должно содержать корректный адрес электронной почты`;
 
 const validateForm = () => {
   const form = document.querySelector('#form__contact');
@@ -9,21 +11,31 @@ const validateForm = () => {
 
   nameInput?.addEventListener('blur', (event) => {
     const target = event.target as HTMLInputElement;
-    if (target.value.length > MIN_LENGTH_NAME) {
-      target.classList.remove('not__valid');
-    } else {
-      target.classList.add('not__valid');
+    const labelName = form?.querySelector(
+      'label[for="name"]'
+    ) as HTMLLabelElement;
+    const isNameValid = target.value.length > RULES_MIN_LENGTH_NAME;
+
+    target.classList.toggle('not__valid', !isNameValid);
+    labelName.classList.toggle('not__valid', !isNameValid);
+
+    if (!isNameValid) {
+      labelName.innerText = RULES_NAME_VALIDATION;
     }
   });
 
   emailInput?.addEventListener('blur', (event) => {
     const target = event.target as HTMLInputElement;
     const isValid = /^[^\s]+@[^\s]+\.[^\s]+$/.test(target.value);
+    const labelEmail = form?.querySelector(
+      'label[for="email"]'
+    ) as HTMLLabelElement;
 
-    if (isValid) {
-      target.classList.remove('not__valid');
-    } else {
-      target.classList.add('not__valid');
+    target.classList.toggle('not__valid', !isValid);
+    labelEmail.classList.toggle('not__valid', !isValid);
+
+    if (!isValid) {
+      labelEmail.innerText = RULES_EMAIL_VALIDATION;
     }
   });
 
@@ -31,15 +43,15 @@ const validateForm = () => {
     event.preventDefault();
     const target = event.target as HTMLFormElement;
     const isValid = !target.querySelector('.not__valid');
+    const span = document.createElement('span');
 
     form.querySelector('.form__valid')?.remove();
-    const span = document.createElement('span');
     span.classList.add('form__valid');
 
     if (!isValid) {
       span.innerText = `
-      1. поле name должно содержать не менее ${MIN_LENGTH_NAME} символов;
-      2. поле email должно содержать корректный адрес электронной почты;
+      1. ${RULES_NAME_VALIDATION};
+      2. ${RULES_EMAIL_VALIDATION};
       `;
       form.appendChild(span);
       return;
