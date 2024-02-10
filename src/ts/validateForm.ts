@@ -1,8 +1,8 @@
 import formSubmit, { FormDataObject } from './formSubmit';
 
 const RULES_MIN_LENGTH_NAME = 3;
-const RULES_NAME_VALIDATION = `поле name должно содержать не менее ${RULES_MIN_LENGTH_NAME} символов`;
-const RULES_EMAIL_VALIDATION = `поле email должно содержать корректный адрес электронной почты`;
+const RULES_NAME_VALIDATION = `Поле name должно содержать не менее ${RULES_MIN_LENGTH_NAME} символов`;
+const RULES_EMAIL_VALIDATION = `Поле email должно содержать корректный адрес электронной почты`;
 
 const validateForm = () => {
   const form = document.querySelector('#form__contact');
@@ -15,12 +15,13 @@ const validateForm = () => {
       'label[for="name"]'
     ) as HTMLLabelElement;
     const isNameValid = target.value.length > RULES_MIN_LENGTH_NAME;
+    const elementP = labelName.querySelector('.message__isValid');
 
     target.classList.toggle('not__valid', !isNameValid);
     labelName.classList.toggle('not__valid', !isNameValid);
 
-    if (!isNameValid) {
-      labelName.innerText = RULES_NAME_VALIDATION;
+    if (!isNameValid && elementP) {
+      elementP.innerHTML = RULES_NAME_VALIDATION;
     }
   });
 
@@ -30,32 +31,22 @@ const validateForm = () => {
     const labelEmail = form?.querySelector(
       'label[for="email"]'
     ) as HTMLLabelElement;
+    const elementP = labelEmail.querySelector('.message__isValid');
 
     target.classList.toggle('not__valid', !isValid);
     labelEmail.classList.toggle('not__valid', !isValid);
 
-    if (!isValid) {
-      labelEmail.innerText = RULES_EMAIL_VALIDATION;
+    if (!isValid && elementP) {
+      elementP.innerHTML = RULES_EMAIL_VALIDATION;
     }
   });
 
-  form?.addEventListener('submit', (event) => {
+  form?.addEventListener('submit', async (event) => {
     event.preventDefault();
     const target = event.target as HTMLFormElement;
-    const isValid = !target.querySelector('.not__valid');
-    const span = document.createElement('span');
-
+    const span = document.querySelector('.form__response') as HTMLSpanElement;
+    span.innerText = '';
     form.querySelector('.form__valid')?.remove();
-    span.classList.add('form__valid');
-
-    if (!isValid) {
-      span.innerText = `
-      1. ${RULES_NAME_VALIDATION};
-      2. ${RULES_EMAIL_VALIDATION};
-      `;
-      form.appendChild(span);
-      return;
-    }
 
     const formData = new FormData(target);
     const formDataObject: FormDataObject = {
@@ -69,13 +60,10 @@ const validateForm = () => {
       span.innerText = `
       Все поля обязательны к заполнению.
       `;
-      form.appendChild(span);
       return;
     }
 
-    formSubmit(span, formDataObject).then((element) =>
-      form.appendChild(element)
-    );
+    await formSubmit(span, formDataObject);
   });
 };
 

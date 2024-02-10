@@ -11,9 +11,7 @@
     <header class="header">
       <div class="header__logo">Logo</div>
       <div class="burger">
-        <div class="burger__icon">
-          <span></span><span></span><span></span>
-        </div>
+        <div class="burger__icon"><span></span><span></span><span></span></div>
         <div class="burger__menu">Title</div>
       </div>
       <div class="burger__overlay"></div>
@@ -21,17 +19,27 @@
     <main class="main">
       <div class="form">
         <form id="form__contact">
-          <input type="text" id="name" name="name" placeholder="Имя" />
-          <label for="name"></label>
-          <input type="text" id="email" name="email" placeholder="E-mail" />
-          <label for="email"></label>
-          <input type="text" id="phone" name="phone" placeholder="Телефон" />
-          <textarea
-            id="message"
-            name="message"
-            placeholder="Сообщение"
-          ></textarea>
+          <label for="name">
+            <input type="text" id="name" name="name" placeholder="Имя" />
+            <p class="message__isValid"></p>
+          </label>
+          <label for="email">
+            <input type="text" id="email" name="email" placeholder="E-mail" />
+            <p class="message__isValid"></p>
+          </label>
+          <label for="phone">
+            <input type="text" id="phone" name="phone" placeholder="Телефон" />
+          </label>
+          <label for="message">
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Сообщение"
+            ></textarea>
+          </label>
+
           <button type="submit">Отправить</button>
+          <span class="form__response"></span>
         </form>
       </div>
     </main>

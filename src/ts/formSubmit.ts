@@ -15,11 +15,11 @@ export interface ApiResponse {
 const BASE_URL = 'http://localhost:9090/api';
 
 export default async function formSubmit(
-  element: HTMLElement,
+  element: HTMLSpanElement,
   dataObject: FormDataObject
-): Promise<HTMLElement> {
+): Promise<HTMLSpanElement> {
   const form = document.querySelector('#form__contact') as HTMLFormElement;
-  const newElement = element.cloneNode(true) as HTMLElement;
+  element.classList.remove('form__response_error');
 
   makeRequest<FormDataObject, ApiResponse>(
     `${BASE_URL}/registration`,
@@ -28,17 +28,17 @@ export default async function formSubmit(
   )
     .then((res) => {
       if (res.data.status === 'success') {
-        newElement.innerText = `Успех! ${res.data.message}`;
+        element.innerText = `Успех! ${res.data.message}`;
         form?.reset();
       } else {
-        newElement.classList.add('form__not-valid');
-        newElement.innerText = `Попробуйте снова: ${res.data.message}`;
+        element.classList.add('form__response_error');
+        element.innerText = `Попробуйте снова: ${res.data.message}`;
       }
     })
     .catch((error) => {
-      newElement.innerText = `Сервер выключен: ${error}`;
-      newElement.classList.add('form__not-valid');
+      element.innerText = `Сервер выключен: ${error}`;
+      element.classList.add('form__response_error');
     });
 
-  return newElement;
+  return element;
 }
