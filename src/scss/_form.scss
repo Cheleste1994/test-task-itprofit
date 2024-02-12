@@ -1,5 +1,5 @@
 .form {
-  max-width: 300px;
+  max-width: 400px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -15,37 +15,42 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     width: 100%;
     padding: 30px 10px;
 
-    > *:not(label) {
+    label {
+      width: 100%;
+
+      p {
+        display: none;
+        font-size: 0.6rem;
+        text-align: center;
+        color: rgba(255, 0, 0, 0.534);
+        position: absolute;
+      }
+
+      &.not__valid p {
+        display: block;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    button, label > *:not(p) {
       background-color: rgba(0, 0, 0, 0.336);
       color: white;
       padding: 5px;
       border: 2px solid rgba(0, 212, 255, 1);
       border-radius: 5px;
+      width: 100%;
+      position: relative;
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.808);
       }
     }
 
-    > label {
-      display: none;
-      font-size: 0.6rem;
-      text-align: center;
-      color: rgba(255, 0, 0, 0.534);
-
-      &.not__valid {
-        display: block;
-        transition: all 0.3s ease-in-out;
-        &:hover {
-          font-size: 0.8rem;
-        }
-      }
-    }
 
     textarea {
       min-height: 50px;
@@ -70,12 +75,12 @@
       font-size: 0.5rem;
     }
 
-    .form__valid {
+    .form__response {
       font-size: 0.7rem;
+      min-height: 30px;
     }
-  }
-
-  .form__not-valid {
-    border-color: rgba(255, 0, 0, 0.534);
+    .form__response_error {
+      color: rgba(255, 0, 0, 0.534);
+    }
   }
 }
